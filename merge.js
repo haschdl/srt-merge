@@ -69,7 +69,7 @@ function merge(srtPrimary, srtSecondary, attrs, noString) {
   }
   let srt3 = srtPrimary.concat(srtSecondary);
   srt3.sort((caption1, caption2) => {
-    return caption1.start - caption2.start;
+    return caption1.data.start - caption2.data.start;
   });
   return noString ? srt3 : Subtitle.stringify(srt3);
 }
