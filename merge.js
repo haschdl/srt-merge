@@ -23,7 +23,7 @@ function merge(srtPrimary, srtSecondary, attrs, noString) {
         srtPrimary = clearPosition(srtPrimary);
         srtSecondary = clearPosition(srtSecondary);
         srtSecondary.forEach(caption => {
-          caption.text = '{\\an8}' + caption.text;
+          caption.data.text = '{\\an8}' + caption.data.text;
         });
       } else if (/^nearest-cue-[0-9]+(-no-append)?$/.test(attr)) {
         const threshold = parseInt(attr.substring(attr.lastIndexOf('cue-') + 4));
@@ -37,7 +37,7 @@ function merge(srtPrimary, srtSecondary, attrs, noString) {
             }
             return captionB;
           } else {
-            captionA.text = captionA.text + '\n' + captionB.text;
+            captionA.data.text = captionA.data.text + '\n' + captionB.data.text;
             return undefined;
           }
         };
@@ -77,8 +77,8 @@ function merge(srtPrimary, srtSecondary, attrs, noString) {
 function clearPosition(srt) {
   return srt.map(caption => {
     caption = Object.assign({}, caption);
-    caption.text = caption.data.text.replace(/{\\a[n]?[0-9]}/g, '');
-    caption.text = caption.data.text.replace(/{\\pos\([0-9]+,[0-9]+\)}/g, '');
+    caption.data.text = caption.data.text.replace(/{\\a[n]?[0-9]}/g, '');
+    caption.data.text = caption.data.text.replace(/{\\pos\([0-9]+,[0-9]+\)}/g, '');
     return caption;
   });
 }

@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ElevenZwei/srt-merge#readme",
   "dependencies": {
     "subtitle": "^4.2.1"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0"
   }
 }
