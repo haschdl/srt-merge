@@ -1,4 +1,4 @@
-const index = require('./index');
+const index = require('./merge');
 const fs = require('fs');
 const srt1 = fs.readFileSync('test_files/jpn_short.srt', 'utf-8');
 const srt2 = fs.readFileSync('test_files/chi_short.srt', 'utf-8');
@@ -14,8 +14,8 @@ const topBottom = index.merge(srt1, srt2, 'top-bottom', true);
 
 // You can also use objects from npm-module subtitle as input
 const Subtitle = require('subtitle');
-const srt01 = Subtitle.parse(srt1);
-const srt02 = Subtitle.parse(srt2);
+const srt01 = Subtitle.parseSync(srt1);
+const srt02 = Subtitle.parseSync(srt2);
 const nearestCueMerge = index.merge(srt01, srt2, 'nearest-cue-1000', true); // srt2 is appended to srt1
 const nearestCueOnlyAlign = index.merge(srt1, srt02, ['nearest-cue-1000-no-append', 'top-bottom'], true); // srt2 is aligned with srt1 at top of screen
 

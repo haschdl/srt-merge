@@ -2,10 +2,10 @@ const Subtitle = require('subtitle');
 
 function merge(srtPrimary, srtSecondary, attrs, noString) {
   if (typeof srtPrimary === 'string') {
-    srtPrimary = Subtitle.parse(srtPrimary);
+    srtPrimary = Subtitle.parseSync(srtPrimary);
   }
   if (typeof srtSecondary === 'string') {
-    srtSecondary = Subtitle.parse(srtSecondary);
+    srtSecondary = Subtitle.parseSync(srtSecondary);
   }
   if (typeof srtPrimary !== 'object' || typeof srtSecondary !== 'object') {
     throw new Error('cannot parse srt file');
@@ -77,8 +77,8 @@ function merge(srtPrimary, srtSecondary, attrs, noString) {
 function clearPosition(srt) {
   return srt.map(caption => {
     caption = Object.assign({}, caption);
-    caption.text = caption.text.replace(/{\\a[n]?[0-9]}/g, '');
-    caption.text = caption.text.replace(/{\\pos\([0-9]+,[0-9]+\)}/g, '');
+    caption.text = caption.data.text.replace(/{\\a[n]?[0-9]}/g, '');
+    caption.text = caption.data.text.replace(/{\\pos\([0-9]+,[0-9]+\)}/g, '');
     return caption;
   });
 }
